@@ -21,8 +21,8 @@
 <div class="wrapper">
     <!-- Navigation -->
     <header>
-    <nav class="main-nav">
-        <ul>
+        <nav class="main-nav">
+            <ul>
                 <li>
                     <a href="/">Home</a>
                 </li>
@@ -35,7 +35,7 @@
                 <li>
                     <a href="/">About</a>
                 </li>
-				<li>
+                <li>
                     <a href="/">Add new route</a>
                 </li>
                 <li>
@@ -47,9 +47,9 @@
                 <li>
                     <a href="/">Logout</a>
                 </li>
-        </ul>
-    </nav>
-</header>
+            </ul>
+        </nav>
+    </header>
     <!-- Top Container -->
     <section class="top-container">
         <div class="showcase">
@@ -71,28 +71,28 @@
 
     <!-- Boxes Section -->
     <section class="boxes">
-        <a href="/" class="main-btn" >
+        <a href="/" class="main-btn">
             <div class="box">
                 <img src="/images/pedestrian.png" height="150px" alt="">
                 <h3>Pedestrian</h3>
                 <p>Is this your Leg day?</p>
             </div>
         </a>
-        <a href="/" class="main-btn" >
+        <a href="/" class="main-btn">
             <div class="box">
                 <img src="/images/bicycle.png" height="150px" alt="">
                 <h3>Bicycle</h3>
                 <p>When you want to be one with nature!</p>
             </div>
         </a>
-        <a href="/" class="main-btn" >
+        <a href="/" class="main-btn">
             <div class="box">
                 <img src="/images/motorcycle.png" height="150px" alt="">
                 <h3>Motorcycle</h3>
                 <p>When you want the wind to blow on your face!</p>
             </div>
         </a>
-        <a href="/" class="main-btn" >
+        <a href="/" class="main-btn">
             <div class="box">
                 <img src="/images/car.png" height="150px" alt="">
                 <h3>Car</h3>
@@ -103,19 +103,21 @@
 
     <!-- Info Section -->
     <section class="road">
-        <img src="/images/most-commented.jpg" alt="">
+        <img th:src="${mostCommented.pictures[0].url}" alt="">
         <div>
-            <h2>The most commented route</h2>
+            <h2>The most commented route: <span th:text="${mostCommented.name}"></span></h2>
             <p>Read more about the most commented route and do not miss the
                 chance to visit it and give your opinion to help other users.</p>
-            <a href="/" class="btn">Learn More</a>
+            <a th:href="@{/routes/details/:id(id = ${mostCommented.id})}" class="btn">Learn More</a>
         </div>
     </section>
 
     <!-- Portfolio -->
     <section class="gallery">
-        <img src="http://res.cloudinary.com/ch-cloud/image/upload/v1630583467/koncyanx4gqwzt9vxgx4.jpg" width="200px" height="200px" alt="">
-        <img src="http://res.cloudinary.com/ch-cloud/image/upload/v1630582448/oowojgn4lagybkvv20jb.jpg" width="200px" height="200px" alt="">
+        <img src="http://res.cloudinary.com/ch-cloud/image/upload/v1630583467/koncyanx4gqwzt9vxgx4.jpg" width="200px"
+             height="200px" alt="">
+        <img src="http://res.cloudinary.com/ch-cloud/image/upload/v1630582448/oowojgn4lagybkvv20jb.jpg" width="200px"
+             height="200px" alt="">
     </section>
 
     <!-- <script th:src="@{/js/weather.js}"></script> -->

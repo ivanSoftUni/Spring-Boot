@@ -1,6 +1,6 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
-import com.example.pathfinder.domain.enums.Level;
+import com.example.pathfinder.models.enums.Level;
 
 import jakarta.persistence.*;
 
@@ -10,26 +10,27 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
-    private String email;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> role;
-
-    @Enumerated(EnumType.STRING)
-    private Level level;
+    @Column
+    private Integer age;
 
     @Column
     private String fullName;
 
     @Column
-    private Integer age;
+    @Enumerated(EnumType.STRING)
+    private Level level;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Column
+    private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public User() {
     }
@@ -59,11 +60,11 @@ public class User extends BaseEntity {
     }
 
     public Set<Role> getRole() {
-        return role;
+        return roles;
     }
 
     public void setRole(Set<Role> role) {
-        this.role = role;
+        this.roles = role;
     }
 
     public Level getLevel() {

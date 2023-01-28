@@ -1,4 +1,4 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +16,7 @@ public class Comment extends BaseEntity {
     @Column
     private LocalDateTime created;
 
-    @Column(columnDefinition = "TEXT", name = "text_content")
+    @Column(columnDefinition = "LONGTEXT", name = "text_content")
     private String text;
 
     @ManyToOne

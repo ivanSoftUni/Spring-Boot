@@ -1,9 +1,11 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "messages")
@@ -11,9 +13,9 @@ public class Message extends BaseEntity {
 
 
     @Column(name = "date_time")
-    private String dateTime;
+    private LocalDateTime dateTime;
 
-    @Column(name = "text_content")
+    @Column(name = "text_content", columnDefinition = "TEXT")
     private String textContent;
 
     @ManyToOne
@@ -25,11 +27,11 @@ public class Message extends BaseEntity {
     public Message() {
     }
 
-    public String getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 

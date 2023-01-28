@@ -1,6 +1,6 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
-import com.example.pathfinder.domain.enums.RoleName;
+import com.example.pathfinder.models.enums.RoleName;
 import jakarta.persistence.*;
 
 @Entity

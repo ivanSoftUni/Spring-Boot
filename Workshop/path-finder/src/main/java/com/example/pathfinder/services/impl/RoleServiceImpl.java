@@ -1,6 +1,6 @@
-package com.example.pathfinder.service.impl;
+package com.example.pathfinder.services.impl;
 
-import com.example.pathfinder.service.RoleService;
+import com.example.pathfinder.services.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service

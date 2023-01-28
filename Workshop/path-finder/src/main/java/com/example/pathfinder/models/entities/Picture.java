@@ -1,4 +1,4 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,7 @@ public class Picture extends BaseEntity {
 
     @Column
     private String title;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String url;
 
     @ManyToOne

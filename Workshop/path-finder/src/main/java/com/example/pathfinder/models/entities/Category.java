@@ -1,6 +1,6 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
-import com.example.pathfinder.domain.enums.CategoryName;
+import com.example.pathfinder.models.enums.CategoryName;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +11,7 @@ public class Category extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CategoryName name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @ManyToOne

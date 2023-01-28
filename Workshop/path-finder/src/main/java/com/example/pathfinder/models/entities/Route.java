@@ -1,6 +1,6 @@
-package com.example.pathfinder.domain.entities;
+package com.example.pathfinder.models.entities;
 
-import com.example.pathfinder.domain.enums.Level;
+import com.example.pathfinder.models.enums.Level;
 
 import jakarta.persistence.*;
 
@@ -10,7 +10,10 @@ import java.util.Set;
 @Table(name = "routes")
 public class Route extends BaseEntity {
 
-    @Column(name = "gpx_coordinates", columnDefinition = "LONGTEXT", length = 3000)
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "gpx_coordinates", columnDefinition = "LONGTEXT")
     private String gpxCoordinates;
 
     @Column(name = "level_enum")
@@ -20,19 +23,43 @@ public class Route extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "video_url")
+    private String videoUrl;
+
+
     @ManyToOne
     private User author;
 
-    @Column(name = "video_url")
-    private String videoUrl;
+    @ManyToMany
+    private Set<Category> categories;
 
     @OneToMany
     private Set<Comment> comments;
 
-    @OneToMany
+    @OneToMany(mappedBy = "route", fetch = FetchType.EAGER)
     private Set<Picture> pictures;
 
     public Route() {
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public Set<Picture> getPictures() {
+        return pictures;
     }
 
     public String getGpxCoordinates() {
