@@ -108,7 +108,7 @@
             <h2>The most commented route: <span th:text="${mostCommented.name}"></span></h2>
             <p>Read more about the most commented route and do not miss the
                 chance to visit it and give your opinion to help other users.</p>
-            <a th:href="@{/routes/details/:id(id = ${mostCommented.id})}" class="btn">Learn More</a>
+            <a th:href="@{/routes/details/(id=${mostCommented.id})}" class="btn">Learn More</a>
         </div>
     </section>
 
