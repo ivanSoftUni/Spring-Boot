@@ -1,12 +1,26 @@
 package com.example.pathfinder.models.dto;
 
-public class UserRegistrationDto {
+import jakarta.validation.constraints.*;
 
+public class UserRegistrationDto {
+    @NotBlank
+    @Size(min = 5, max = 20)
     private String username;
+    @NotBlank
+    @Size(min = 5, max = 20)
     private String fullName;
+    @NotBlank
+    @Email
     private String email;
+
+    @Min(0)
+    @Max(90)
     private int age;
+    @NotBlank
+    @Size(min = 5, max = 20)
     private String password;
+    @NotBlank
+    @Size(min = 5, max = 20)
     private String confirmPassword;
 
 

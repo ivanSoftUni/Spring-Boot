@@ -3,16 +3,21 @@
 
 <head>
     <title>Pathfinder</title>
+
     <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
 <main class="p-5 align-content-center bg-blur my-register-div">
+
+    <th:block th:include="~{/fragments/header}"/>
+
     <h1 class="border-bottom">Register</h1>
     <div class="d-flex justify-content-center ">
         <div class="row g-3">
             <form
                     th:action="@{/register}"
-                    th:method="post">
+                    th:method="post"
+                    th:object="${userRegistrationDto}">
 
                 <div>
                     <div class="col-auto">
@@ -20,7 +25,7 @@
                     </div>
                     <div class="col-auto">
                         <input name="username"
-
+                               th:field="*{username}"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputUsername"
@@ -42,6 +47,7 @@
                     </div>
                     <div class="col-auto">
                         <input name="fullName"
+                               th:field="*{fullName}"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputFullName"
@@ -59,6 +65,7 @@
                     </div>
                     <div class="col-auto">
                         <input name="email"
+                               th:field="*{email}"
                                required
                                type="email"
                                id="inputEmail"
@@ -74,6 +81,7 @@
                     </div>
                     <div class="col-auto">
                         <input name="age" required
+                               th:field="*{age}"
                                type="number"
                                id="inputAge"
                                class="form-control"
@@ -89,6 +97,7 @@
                     </div>
                     <div class="col-auto">
                         <input name="password"
+                               th:field="*{password}"
                                required minlength="5" maxlength="20"
                                type="password"
                                id="inputPassword"
@@ -107,6 +116,7 @@
                     </div>
                     <div class="col-auto">
                         <input name="confirmPassword"
+                               th:field="*{confirmPassword}"
                                required minlength="5" maxlength="20"
                                type="password"
                                id="inputConfirmPassword"
