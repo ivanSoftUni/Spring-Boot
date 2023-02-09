@@ -21,6 +21,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void register(UserRegistrationDto registrationDto) {
+
         if (!registrationDto.getPassword().equals(registrationDto.getConfirmPassword())) {
             throw new RuntimeException("password.match");
         }
@@ -29,6 +30,12 @@ public class AuthServiceImpl implements AuthService {
 
         if (byEmail.isPresent()) {
             throw new RuntimeException("email.used");
+        }
+
+        Optional<User> byUsername = this.userRepository.findByUsername(registrationDto.getUsername());
+
+        if (byUsername.isPresent()) {
+            throw new RuntimeException("username.taken");
         }
 
         User user = new User(

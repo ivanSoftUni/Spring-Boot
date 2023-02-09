@@ -37,7 +37,7 @@
                                class="invalid-feedback bg-danger rounded">Username length must be more than 3
                             characters</small>
 
-                        <small id="usernameUniqueError"
+                        <small id="usernameUniqueError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                                class=" bg-danger rounded">Username is already occupied</small>
 
                     </div>
