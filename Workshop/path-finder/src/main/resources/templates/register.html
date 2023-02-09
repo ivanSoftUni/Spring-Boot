@@ -15,6 +15,7 @@
     <div class="d-flex justify-content-center ">
         <div class="row g-3">
             <form
+                    class="registration-form"
                     th:action="@{/register}"
                     th:method="post"
                     th:object="${userRegistrationDto}">
@@ -26,6 +27,7 @@
                     <div class="col-auto">
                         <input name="username"
                                th:field="*{username}"
+                               th:errorclass="is-invalid"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputUsername"
@@ -71,7 +73,7 @@
                                id="inputEmail"
                                class="form-control"
                                aria-describedby="emailHelpInline">
-                        <small id="emailError"
+                        <small id="emailError" th:if="${#fields.hasErrors('email')}"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
                     </div>
                 </div>

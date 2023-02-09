@@ -357,3 +357,7 @@ body {
     height: 40px;
     background-color: #0833e3
 }
+
+.registration-form .bg-danger {
+    color: white;
+}

@@ -4,6 +4,7 @@ import com.example.pathfinder.models.enums.Level;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,6 +34,16 @@ public class User extends BaseEntity {
     private Set<Role> roles;
 
     public User() {
+        this.roles = new HashSet<>();
+    }
+
+    public User(String username,String fullName,  String email, int age, String password ) {
+        this();
+        this.username = username;
+        this.fullName = fullName;
+        this.email = email;
+        this.age = age;
+        this.password = password;
     }
 
     public String getUsername() {
