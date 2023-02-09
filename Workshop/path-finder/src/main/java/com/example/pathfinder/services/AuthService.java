@@ -6,4 +6,5 @@ public interface AuthService {
 
     void register(UserRegistrationDto registrationDto);
 
+    public void logout();
 }

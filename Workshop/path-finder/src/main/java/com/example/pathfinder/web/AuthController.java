@@ -54,4 +54,14 @@ public class AuthController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        this.authService.logout();
+
+        return "redirect:/";
+
+    }
+
+
 }
