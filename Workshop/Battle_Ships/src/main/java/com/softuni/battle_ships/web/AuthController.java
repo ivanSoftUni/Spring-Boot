@@ -68,10 +68,16 @@ public class AuthController {
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors() || !this.authService.login(loginDto)) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginDto", loginDto);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.loginDto", bindingResult);
+
+            return "redirect:/login";
+        }
+        if (!this.authService.login(loginDto)) {
+            redirectAttributes.addFlashAttribute("loginDto", loginDto);
+            redirectAttributes.addFlashAttribute("badCredentials", true);
 
             return "redirect:/login";
         }
@@ -82,7 +88,7 @@ public class AuthController {
 
     @GetMapping("/logout")
     public String logout() {
-        this.authService.logout();
+
 
         return "redirect:/";
 

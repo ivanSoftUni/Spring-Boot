@@ -1,7 +1,6 @@
 package com.softuni.battle_ships.models.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 
@@ -14,7 +13,6 @@ public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @Column(nullable = false, unique = true)
     private String name;
@@ -42,6 +40,22 @@ public class Ship {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setHealth(long health) {
+        this.health = health;
+    }
+
+    public void setPower(long power) {
+        this.power = power;
+    }
+
     public String getName() {
         return name;
     }
@@ -54,17 +68,11 @@ public class Ship {
         return health;
     }
 
-    public void setHealth(Integer health) {
-        this.health = health;
-    }
 
     public long getPower() {
         return power;
     }
 
-    public void setPower(Integer power) {
-        this.power = power;
-    }
 
     public LocalDate getCreated() {
         return created;

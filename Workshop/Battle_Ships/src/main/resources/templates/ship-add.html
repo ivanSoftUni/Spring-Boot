@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,31 +10,7 @@
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body class="body-main">
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top rounded">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="/">Login</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="/">Register</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="/">Add Ship</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="/">Logout</a>
-                </li>
-            </ul>
-            <a class="nav-link" href="/">
-                <img width="50px" src="/images/ufo.png" alt="Ufo image">
-            </a>
-        </div>
-    </nav>
+<header th:include="~{fragments/navigation}">
 </header>
 <main role="main">
     <div class="jumbotron">
@@ -42,14 +19,22 @@
                 <strong class="bg-blur rounded border-white pl-3 font-weight-bold">Add New Ship</strong></h1>
         </div>
         <div class="container bg-blur rounded p-5 mt-5 w-75">
-            <form action="/ships/add" method="POST"
+            <form th:action="@{/ships/add}"
+                  th:method="POST"
+                  th:object="${createShipDto}"
+
                   class=" text-center text-light">
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name"
-                               aria-describedby="nameHelpInline" placeholder="Name">
-                        <small id="nameHelpInline" class="bg-danger text-light rounded">
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               th:field="*{name}"
+                               th:errorclass="is-invalid"
+                               aria-describedby="nameHelpInline"
+                               placeholder="Name">
+                        <small id="nameHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             Name must be between 2 and 10 characters.
                         </small>
                     </div>
@@ -57,9 +42,14 @@
                 <div class="form-group row">
                     <label for="power" class="col-sm-2 col-form-label">Power</label>
                     <div class="col-sm-10">
-                        <input type="number" step="1" class="form-control" id="power"
+                        <input type="number"
+                               step="1"
+                               class="form-control"
+                               id="power"
+                               th:field="*{power}"
+                               th:errorclass="is-invalid"
                                aria-describedby="powerHelpInline">
-                        <small id="powerHelpInline" class="bg-danger text-light rounded">
+                        <small id="powerHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             The power must be positive.
                         </small>
                     </div>
@@ -67,9 +57,14 @@
                 <div class="form-group row">
                     <label for="health" class="col-sm-2 col-form-label">Health</label>
                     <div class="col-sm-10">
-                        <input type="number" step="1" class="form-control" id="health"
+                        <input type="number"
+                               step="1"
+                               class="form-control"
+                               id="health"
+                               th:field="*{health}"
+                               th:errorclass="is-invalid"
                                aria-describedby="healthHelpInline">
-                        <small id="healthHelpInline" class="bg-danger text-light rounded">
+                        <small id="healthHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             The health must be positive.
                         </small>
                     </div>
@@ -77,9 +72,13 @@
                 <div class="form-group row">
                     <label for="created" class="col-sm-2 col-form-label">Created date</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="created"
+                        <input type="date"
+                               class="form-control"
+                               id="created"
+                               th:field="*{created}"
+                               th:errorclass="is-invalid"
                                aria-describedby="createdHelpInline">
-                        <small id="createdTimeHelpInline" class="bg-danger text-light rounded">
+                        <small id="createdTimeHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             Created date cannot be in the future.
                         </small>
                     </div>
@@ -87,14 +86,18 @@
                 <div class="form-group row">
                     <label for="category" class="col-sm-2 col-form-label">Category</label>
                     <div class="col-sm-10">
-                        <select id="category" name="category" class="custom-select"
+                        <select id="category"
+                                name="category"
+                                class="custom-select"
+                                th:field="*{category}"
+                                th:errorclass="is-invalid"
                                 aria-describedby="categoryHelpInline">
-                            <option value="" selected>Category</option>
-                            <option value="">BATTLE</option>
-                            <option value="">CARGO</option>
-                            <option value="">PATROL</option>
+                            <option value="-1" selected>Category</option>
+                            <option value="0">BATTLE</option>
+                            <option value="1">CARGO</option>
+                            <option value="2">PATROL</option>
                         </select>
-                        <small id="categoryHelpInline" class="bg-danger text-light rounded">
+                        <small id="categoryHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             You must select the category.
                         </small>
                     </div>

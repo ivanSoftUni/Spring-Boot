@@ -10,29 +10,7 @@
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body class="body-main">
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top  rounded">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/ship-add">Add Ship</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-            </ul>
-            <img width="50px" src="/images/ufo.png" alt="Ufo image">
-        </div>
-    </nav>
+<header th:include="~{fragments/navigation}">
 </header>
 <main role="main">
     <div class="jumbotron">
@@ -49,7 +27,8 @@
                           th:object="${loginDto}"
                           class="text-center text-light">
                         <h3 class="mt-5 text-center">
-                            <strong class="rounded  pl-3 text-danger">Enter valid
+                            <strong th:if="${badCredentials}" class="rounded  pl-3 text-danger">
+                                Enter valid
                                 username and
                                 password</strong>
                         </h3>

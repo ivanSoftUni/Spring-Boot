@@ -4,6 +4,7 @@ import com.softuni.battle_ships.models.dtos.LoginDto;
 import com.softuni.battle_ships.models.dtos.UserRegistrationDto;
 import com.softuni.battle_ships.models.entities.User;
 import com.softuni.battle_ships.repositories.UserRepository;
+import com.softuni.battle_ships.sesion.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 @Service
 public class AuthService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private LoggedUser loggedUser;
 
     @Autowired
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, LoggedUser loggedUser) {
         this.userRepository = userRepository;
+        this.loggedUser = loggedUser;
     }
 
 
@@ -27,13 +30,13 @@ public class AuthService {
 
         Optional<User> byEmail = this.userRepository.findByEmail(userRegistrationDto.getEmail());
 
-        if (byEmail.isPresent()){
+        if (byEmail.isPresent()) {
             return false;
         }
 
         Optional<User> byUsername = this.userRepository.findByUsername(userRegistrationDto.getUsername());
 
-        if (byUsername.isPresent()){
+        if (byUsername.isPresent()) {
             return false;
         }
 
@@ -48,11 +51,16 @@ public class AuthService {
         return true;
     }
 
-    public void logout() {
-
-    }
-
     public boolean login(LoginDto loginDto) {
-        return false;
+
+        Optional<User> existUser = this.userRepository.findByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
+
+        if (existUser.isEmpty()) {
+            return false;
+        }
+
+        this.loggedUser.login(existUser.get());
+
+        return true;
     }
 }
