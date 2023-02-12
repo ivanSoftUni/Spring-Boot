@@ -4,35 +4,37 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "ships")
-public class Ship extends BaseEntity {
+public class Ship {
 
-    @NotBlank
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
     @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
     @Positive
-    @NotBlank
     private long health;
 
     @Column(nullable = false)
     @Positive
-    @NotBlank
     private long power;
 
     @Column(nullable = false)
-    @NotBlank
     @Past
     private LocalDate created;
 
-    @OneToOne
+    @ManyToOne
     private Category category;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
 

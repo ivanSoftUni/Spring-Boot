@@ -1,4 +1,4 @@
-package com.softuni.battle_ships.models.dto;
+package com.softuni.battle_ships.models.dtos;
 
 import jakarta.validation.constraints.*;
 
@@ -13,15 +13,18 @@ public class UserRegistrationDto {
     private String fullName;
 
     @NotBlank
-    @Min(3)
+    @Email
+    private String email;
+    @NotBlank
+    @Size(min = 3)
     private String password;
 
     @NotBlank
+    @Size(min = 3)
+    private String confirmPassword;
 
-    @Email
-    private String email;
 
-    public UserRegistrationDto(){
+    public UserRegistrationDto() {
 
     }
 
@@ -55,5 +58,24 @@ public class UserRegistrationDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRegistrationDto{" +
+                "username='" + username + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                '}';
     }
 }

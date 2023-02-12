@@ -1,21 +1,30 @@
 package com.softuni.battle_ships.models.entities;
 
-import com.softuni.battle_ships.models.entities.enums.CategoryName;
+import com.softuni.battle_ships.models.enums.CategoryName;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "categories")
-public class Category extends BaseEntity {
+public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.ORDINAL)
     @Column(unique = true, nullable = false)
-    @Enumerated
     private CategoryName name;
+
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
     public Category() {
 
+    }
+
+    public Category(CategoryName name) {
+        this.name = name;
     }
 
     public CategoryName getName() {
