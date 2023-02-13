@@ -14,7 +14,7 @@ import java.util.Optional;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private LoggedUser loggedUser;
+    private final LoggedUser loggedUser;
 
     @Autowired
     public AuthService(UserRepository userRepository, LoggedUser loggedUser) {

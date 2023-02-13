@@ -2,12 +2,8 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Battleships Application</title>
-    <link rel="stylesheet" href="/css/reset-css.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 <body class="body-main">
 <header th:include="~{fragments/navigation}">
@@ -15,7 +11,10 @@
 <main role="main">
     <div class="jumbotron">
         <h1 class="text-center p-5 text-white font-weight-bold">Battle</h1>
-        <form action="/" method="" class="row mb-2">
+        <form th:action="@{/battle}"
+              th:method="post"
+              th:object="${startBattleDto}"
+              class="row mb-2">
             <div class="col-md-6">
                 <div class="card flex-md-row bg-blur mb-4 box-shadow h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
@@ -25,11 +24,10 @@
                             Select the attacker
                         </h3>
                         <div class="mb-1 text-white">Select one of the ships that are owned by the current user</div>
-                        <select class="form-select mt-5" aria-label="Default select example">
-                            <option selected>Select one of the ships that are owned by the current user</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select mt-5" aria-label="Default select example" th:field="*{attackerId}">
+                            <option value="0" selected>Select one of the ships that are owned by the current user
+                            </option>
+                            <option th:each="ship: ${ownShips}" th:value="${ship.getId()}" th:text="${ship.getName()}"/>
                         </select>
                     </div>
                     <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
@@ -46,11 +44,10 @@
                             Select the defender
                         </h3>
                         <div class="mb-1 text-white">Select one of the ships that are owned by other users</div>
-                        <select class="form-select mt-5" aria-label="Default select example">
-                            <option selected>Select one of the ships that are owned by other users</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select mt-5" aria-label="Default select example" th:field="*{defenderId}">
+                            <option value="0" selected>Select one of the ships that are owned by other users</option>
+                            <option th:each="ship: ${enemyShips}" th:value="${ship.getId()}"
+                                    th:text="${ship.getName()}"/>
                         </select>
                     </div>
                     <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
@@ -68,7 +65,12 @@
                     <div class="text-center">
                         <h5>Name -- Health -- Power </h5>
                         <ul>
-                            <li class="font-weight-bold">| Name | Health | Power |</li>
+                            <li class="font-weight-bold" th:each="ship: ${sortedShips}">
+                                <span th:text="${ship.getName()}"/>
+                                <span th:text="${ship.getHealth()}"/>
+                                <span th:text="${ship.getPower()}"/>
+
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -76,8 +78,6 @@
         </div>
     </div>
 </main>
-<footer class="container text-white">
-    <p>&copy;SoftUni Spring Team 2021. All rights reserved.</p>
-</footer>
+<th:block th:replace="~{/fragments/footer}"/>
 </body>
 </html>

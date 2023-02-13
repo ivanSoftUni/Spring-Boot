@@ -4,6 +4,7 @@ import com.softuni.battle_ships.models.dtos.LoginDto;
 import com.softuni.battle_ships.models.dtos.UserRegistrationDto;
 import com.softuni.battle_ships.repositories.UserRepository;
 import com.softuni.battle_ships.services.AuthService;
+import com.softuni.battle_ships.sesion.LoggedUser;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,13 @@ public class AuthController {
 
     private final UserRepository userRepository;
     private AuthService authService;
+    private LoggedUser loggedUser;
 
     @Autowired
-    public AuthController(UserRepository userRepository, AuthService authService) {
+    public AuthController(UserRepository userRepository, AuthService authService, LoggedUser loggedUser) {
         this.userRepository = userRepository;
         this.authService = authService;
+        this.loggedUser = loggedUser;
     }
 
     @ModelAttribute("userRegistrationDto")
@@ -59,7 +62,9 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-
+        if (loggedUser.getId() != null) {
+            return "redirect:/home";
+        }
         return "login";
     }
 

@@ -1,6 +1,7 @@
 package com.softuni.battle_ships.services;
 
 import com.softuni.battle_ships.models.dtos.CreateShipDto;
+import com.softuni.battle_ships.models.dtos.ShipDto;
 import com.softuni.battle_ships.models.entities.Category;
 import com.softuni.battle_ships.models.entities.Ship;
 import com.softuni.battle_ships.models.entities.User;
@@ -12,7 +13,10 @@ import com.softuni.battle_ships.sesion.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipService {
@@ -62,5 +66,37 @@ public class ShipService {
         this.shipRepository.save(ship);
 
         return true;
+    }
+
+    public List<ShipDto> getOwnedShips() {
+        return null;
+    }
+
+    public List<ShipDto> getEnemyShips() {
+        return null;
+    }
+
+    public List<ShipDto> getShipsOwnedBy(Long ownerId) {
+        return
+                this.shipRepository.findByUserId(ownerId)
+                        .stream()
+                        .map(ShipDto::new)
+                        .collect(Collectors.toList());
+    }
+
+    public List<ShipDto> getShipsNotOwnedBy(Long ownerId) {
+        return
+                this.shipRepository.findByUserIdNot(ownerId)
+                .stream()
+                .map(ShipDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ShipDto> getAllSorted() {
+        return
+                this.shipRepository.findAllByOrderByHealthAscNameDescPower()
+                .stream()
+                .map(ShipDto::new)
+                .collect(Collectors.toList());
     }
 }

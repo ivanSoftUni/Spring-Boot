@@ -2,12 +2,8 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Battleships Application</title>
-    <link rel="stylesheet" href="/css/reset-css.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 <body class="body-main">
 <header th:include="~{fragments/navigation}">
@@ -31,9 +27,7 @@
             </div>
         </div>
     </div>
-    <footer class="container mt-0 text-white">
-        <p>&copy;SoftUni Spring Team 2021. All rights reserved.</p>
-    </footer>
+    <th:block th:replace="~{/fragments/footer}"/>
 </main>
 </body>
 </html>
