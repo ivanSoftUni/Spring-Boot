@@ -21,9 +21,6 @@ public class BattleController {
     @PostMapping("/battle")
     public String battle(@Valid StartBattleDto startBattleDto) {
 
-        System.out.println(startBattleDto.getAttackerId() + " " + startBattleDto.getDefenderId());
-
-
         this.battleService.attack(startBattleDto);
 
         return "redirect:/home";
