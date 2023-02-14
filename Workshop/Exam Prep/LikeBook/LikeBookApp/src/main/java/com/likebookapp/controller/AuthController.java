@@ -4,7 +4,7 @@ import com.likebookapp.model.dtos.LoginUserDto;
 import com.likebookapp.model.dtos.UserRegistrationDto;
 import com.likebookapp.repository.UserRepository;
 import com.likebookapp.service.AuthService;
-import com.likebookapp.util.LoggedUser;
+import com.likebookapp.session.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,7 +21,6 @@ public class AuthController {
     private final UserRepository userRepository;
 
     private AuthService authService;
-    private LoggedUser loggedUser;
 
     @ModelAttribute("userRegistrationDto")
     public UserRegistrationDto initForm() {
@@ -34,10 +33,9 @@ public class AuthController {
     }
 
     @Autowired
-    public AuthController(UserRepository userRepository, AuthService authService, LoggedUser loggedUser) {
+    public AuthController(UserRepository userRepository, AuthService authService) {
         this.userRepository = userRepository;
         this.authService = authService;
-        this.loggedUser = loggedUser;
     }
 
     @GetMapping("/register")
@@ -86,6 +84,8 @@ public class AuthController {
 
             return "redirect:/login";
         }
+
+
         return "redirect:/home";
     }
 

@@ -4,9 +4,8 @@ import com.likebookapp.model.dtos.LoginUserDto;
 import com.likebookapp.model.dtos.UserRegistrationDto;
 import com.likebookapp.model.entity.User;
 import com.likebookapp.repository.UserRepository;
-import com.likebookapp.util.LoggedUser;
+import com.likebookapp.session.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,7 +18,7 @@ public class AuthService {
 
 
     @Autowired
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
+    public AuthService(UserRepository userRepository, LoggedUser loggedUser) {
         this.userRepository = userRepository;
         this.loggedUser = loggedUser;
     }
@@ -54,15 +53,13 @@ public class AuthService {
 
     public boolean login(LoginUserDto loginUserDto) {
 
-        Optional<User> user = this.userRepository.findByUsernameAndPassword(
+        Optional<User> userById = this.userRepository.findByUsernameAndPassword(
                 loginUserDto.getUsername(),
                 loginUserDto.getPassword());
 
-        if (user.isEmpty()) {
+        if (userById.isEmpty()) {
             return false;
         }
-
-        this.loggedUser.login(user.get());
 
         return true;
     }

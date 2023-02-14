@@ -1,6 +1,7 @@
 package com.likebookapp.model.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -19,8 +20,31 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @OneToMany
+    private Set<Post> posts;
+
+    @ManyToMany
+    private Set<Post> likedPosts;
+
     public User() {
 
+    }
+
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
+    public Set<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(Set<Post> likedPosts) {
+        this.likedPosts = likedPosts;
     }
 
     public Long getId() {
