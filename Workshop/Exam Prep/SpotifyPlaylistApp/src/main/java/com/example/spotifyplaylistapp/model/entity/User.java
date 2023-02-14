@@ -2,6 +2,7 @@ package com.example.spotifyplaylistapp.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,8 @@ public class User extends BaseEntity {
     @ManyToMany
     private Set<Song> playlist;
 
-    public User(){
-
+    public User() {
+        this.playlist = new HashSet<>();
     }
 
     public String getUsername() {
