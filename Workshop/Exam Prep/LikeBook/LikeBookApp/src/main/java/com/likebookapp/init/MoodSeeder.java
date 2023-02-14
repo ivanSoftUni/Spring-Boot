@@ -1,4 +1,4 @@
-package com.likebookapp.util;
+package com.likebookapp.init;
 
 import com.likebookapp.model.entity.Mood;
 import com.likebookapp.model.enums.MoodName;
