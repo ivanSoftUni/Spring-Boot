@@ -50,13 +50,28 @@ public class HomeController {
         Set<Song> userPlaylist = this.songService.getUserPlaylist();
         model.addAttribute("userPlaylist", userPlaylist);
 
+        model.addAttribute("totalDuration", this.userService.totalDurationOfPlaylist());
         return "home";
     }
 
     @GetMapping("/addToPlaylist/{id}")
     public String addToPlaylist(@PathVariable Long id) {
+
+        if (!userService.isLogged()) {
+            return "redirect:/";
+        }
+
         this.userService.addToPlaylist(id);
         return "redirect:/home";
     }
 
+    @GetMapping("/removeAllSongs")
+    public String removeAllSongs() {
+        if (!userService.isLogged()) {
+            return "redirect:/";
+        }
+
+        this.userService.removeAllSongsFromPlaylist();
+        return "redirect:/home";
+    }
 }

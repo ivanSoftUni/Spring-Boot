@@ -10,6 +10,7 @@ import com.example.spotifyplaylistapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 @Service
@@ -85,9 +86,20 @@ public class UserService {
         User user = optionalUser.get();
         user.getPlaylist().add(song);
         this.userRepository.save(user);
-        System.out.println();
-
     }
 
+    public String totalDurationOfPlaylist() {
+        User user = this.userRepository.findById(currentUser.getId()).get();
 
+        long playlistDuration = user.getPlaylist().stream().mapToLong(song -> song.getDuration()).sum();
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%d:%02d min. total", playlistDuration / 60, playlistDuration % 60));
+        return sb.toString();
+    }
+
+    public void removeAllSongsFromPlaylist() {
+        User user = this.userRepository.findById(currentUser.getId()).get();
+        user.setPlaylist(new HashSet<>());
+        this.userRepository.save(user);
+    }
 }
