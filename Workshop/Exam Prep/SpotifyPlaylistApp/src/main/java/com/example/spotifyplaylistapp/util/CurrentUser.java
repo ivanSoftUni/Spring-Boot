@@ -30,4 +30,6 @@ public class CurrentUser {
         this.id = user.getId();
         this.username = user.getUsername();
     }
+
+
 }

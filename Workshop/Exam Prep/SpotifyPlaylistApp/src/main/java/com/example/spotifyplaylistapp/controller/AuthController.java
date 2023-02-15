@@ -3,6 +3,7 @@ package com.example.spotifyplaylistapp.controller;
 import com.example.spotifyplaylistapp.model.dtos.LoginDto;
 import com.example.spotifyplaylistapp.model.dtos.UserRegistrationDto;
 import com.example.spotifyplaylistapp.service.UserService;
+import com.example.spotifyplaylistapp.util.CurrentUser;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthController {
 
     private UserService userService;
+    private CurrentUser currentUser;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, CurrentUser currentUser) {
         this.userService = userService;
+        this.currentUser = currentUser;
     }
 
     @ModelAttribute("userRegistrationDto")
@@ -82,6 +85,15 @@ public class AuthController {
         this.userService.login(loginDto);
 
         return "redirect:/home";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        if (!this.userService.isLogged(currentUser)) {
+            return "redirect:/login";
+        }
+        this.userService.logout(currentUser);
+        return "redirect:/";
     }
 
 }

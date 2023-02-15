@@ -18,7 +18,7 @@ public class Song extends BaseEntity {
     private String title;
 
     @Column(nullable = false)
-    private Integer duration;
+    private Long duration;
 
     @Column
     private LocalDate releaseDate;
@@ -46,11 +46,11 @@ public class Song extends BaseEntity {
         this.title = title;
     }
 
-    public Integer getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 

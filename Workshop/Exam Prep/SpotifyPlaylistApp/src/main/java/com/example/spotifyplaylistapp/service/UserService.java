@@ -53,9 +53,6 @@ public class UserService {
             return false;
         }
 
-
-        System.out.println();
-
         return true;
     }
 
@@ -63,5 +60,18 @@ public class UserService {
         User user = this.userRepository.findByUsername(loginDto.getUsername()).get();
 
         this.currentUser.login(user);
+    }
+
+    public boolean isLogged(CurrentUser currentUser) {
+
+        if (currentUser.getId() == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public void logout(CurrentUser currentUser) {
+        this.currentUser.setId(null);
+        this.currentUser.setUsername(null);
     }
 }
