@@ -1,5 +1,7 @@
 package com.example.spotifyplaylistapp.service;
 
+import com.example.spotifyplaylistapp.model.entity.Song;
+import com.example.spotifyplaylistapp.repository.SongRepository;
 import com.example.spotifyplaylistapp.util.CurrentUser;
 import com.example.spotifyplaylistapp.model.dtos.LoginDto;
 import com.example.spotifyplaylistapp.model.dtos.UserRegistrationDto;
@@ -15,12 +17,14 @@ public class UserService {
 
     private UserRepository userRepository;
     private CurrentUser currentUser;
+    private SongRepository songRepository;
 
 
     @Autowired
-    public UserService(UserRepository userRepository, CurrentUser currentUser) {
+    public UserService(UserRepository userRepository, CurrentUser currentUser, SongRepository songRepository) {
         this.userRepository = userRepository;
         this.currentUser = currentUser;
+        this.songRepository = songRepository;
     }
 
     public boolean toRegister(UserRegistrationDto userRegistrationDto) {
@@ -71,4 +75,19 @@ public class UserService {
         this.currentUser.setId(null);
         this.currentUser.setUsername(null);
     }
+
+    public void addToPlaylist(Long id) {
+
+        Optional<Song> optionalSong = this.songRepository.findById(id);
+        Song song = optionalSong.get();
+
+        Optional<User> optionalUser = this.userRepository.findById(this.currentUser.getId());
+        User user = optionalUser.get();
+        user.getPlaylist().add(song);
+        this.userRepository.save(user);
+        System.out.println();
+
+    }
+
+
 }

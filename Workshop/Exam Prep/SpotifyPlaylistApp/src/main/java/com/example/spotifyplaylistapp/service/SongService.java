@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SongService {
@@ -72,7 +73,7 @@ public class SongService {
         return songs;
     }
 
-    public List<Song> getUserPlaylist() {
+    public Set<Song> getUserPlaylist() {
         Optional<User> byId = this.userRepository.findById(currentUser.getId());
         User user = byId.get();
         return user.getPlaylist();

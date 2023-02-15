@@ -7,8 +7,10 @@ import com.example.spotifyplaylistapp.util.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -45,11 +47,16 @@ public class HomeController {
         List<Song> jazzSongs = this.songService.getJazzSongs();
         model.addAttribute("jazzSongs", jazzSongs);
 
-        List<Song> userPlaylist = this.songService.getUserPlaylist();
+        Set<Song> userPlaylist = this.songService.getUserPlaylist();
         model.addAttribute("userPlaylist", userPlaylist);
 
         return "home";
     }
 
+    @GetMapping("/addToPlaylist/{id}")
+    public String addToPlaylist(@PathVariable Long id) {
+        this.userService.addToPlaylist(id);
+        return "redirect:/home";
+    }
 
 }

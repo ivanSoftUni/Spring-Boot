@@ -21,10 +21,10 @@ public class User extends BaseEntity {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Song> playlist;
+    private Set<Song> playlist;
 
     public User() {
-        this.playlist = new ArrayList<>();
+        this.playlist = new HashSet<>();
     }
 
     public String getUsername() {
@@ -51,11 +51,11 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public List<Song> getPlaylist() {
+    public Set<Song> getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(List<Song> playlist) {
+    public void setPlaylist(Set<Song> playlist) {
         this.playlist = playlist;
     }
 }
