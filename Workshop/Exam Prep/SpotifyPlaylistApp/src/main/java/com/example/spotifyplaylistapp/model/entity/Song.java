@@ -26,7 +26,7 @@ public class Song extends BaseEntity {
     @ManyToOne
     private Style style;
 
-    public Song(){
+    public Song() {
 
     }
 
@@ -68,5 +68,14 @@ public class Song extends BaseEntity {
 
     public void setStyle(Style style) {
         this.style = style;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.performer + " - " + this.title);
+        sb.append(String.format(" (%d:%02d min)",this.duration / 60,this.duration % 60  ));
+        return sb.toString();
     }
 }

@@ -89,7 +89,7 @@ public class AuthController {
 
     @GetMapping("/logout")
     public String logout() {
-        if (!this.userService.isLogged(currentUser)) {
+        if (!this.userService.isLogged()) {
             return "redirect:/login";
         }
         this.userService.logout(currentUser);

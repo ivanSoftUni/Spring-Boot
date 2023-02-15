@@ -38,7 +38,7 @@ public class SongController {
 
     @GetMapping("/song/add")
     public String addSong() {
-        if (!this.userService.isLogged(currentUser)) {
+        if (!this.userService.isLogged()) {
             return "redirect:/";
         }
         return "song-add";

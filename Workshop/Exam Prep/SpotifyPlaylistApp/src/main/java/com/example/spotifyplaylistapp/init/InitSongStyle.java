@@ -25,7 +25,7 @@ public class InitSongStyle implements CommandLineRunner {
 
         if (this.styleRepository.count() == 0) {
             List<Style> styles = Arrays.stream(StyleType.values())
-                    .map(s -> new Style(s))
+                    .map(s -> new Style(StyleType.valueOf(String.valueOf(s))))
                     .collect(Collectors.toList());
 
             this.styleRepository.saveAll(styles);

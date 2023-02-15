@@ -28,6 +28,7 @@ public class Style extends BaseEntity {
         this.name = name;
     }
 
+
     public StyleType getName() {
         return name;
     }

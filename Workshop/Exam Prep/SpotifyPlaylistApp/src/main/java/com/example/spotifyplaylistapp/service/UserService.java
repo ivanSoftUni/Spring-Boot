@@ -62,12 +62,9 @@ public class UserService {
         this.currentUser.login(user);
     }
 
-    public boolean isLogged(CurrentUser currentUser) {
+    public boolean isLogged() {
 
-        if (currentUser.getId() == null) {
-            return false;
-        }
-        return true;
+        return currentUser.getId() != null;
     }
 
     public void logout(CurrentUser currentUser) {

@@ -2,7 +2,9 @@ package com.example.spotifyplaylistapp.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,10 +21,10 @@ public class User extends BaseEntity {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Song> playlist;
+    private List<Song> playlist;
 
     public User() {
-        this.playlist = new HashSet<>();
+        this.playlist = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -49,11 +51,11 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public Set<Song> getPlaylist() {
+    public List<Song> getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(Set<Song> playlist) {
+    public void setPlaylist(List<Song> playlist) {
         this.playlist = playlist;
     }
 }
