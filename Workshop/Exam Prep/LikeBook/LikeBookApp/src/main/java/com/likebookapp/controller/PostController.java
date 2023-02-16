@@ -2,25 +2,29 @@ package com.likebookapp.controller;
 
 import com.likebookapp.model.dtos.AddPostDto;
 import com.likebookapp.service.PostService;
-import com.likebookapp.session.LoggedUser;
+import com.likebookapp.util.LoggedUser;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
+
 
 @Controller
 public class PostController {
 
     private PostService postService;
+    private LoggedUser loggedUser;
 
     @Autowired
-    public PostController(LoggedUser loggedUser, PostService postService) {
+    public PostController( PostService postService, LoggedUser loggedUser) {
         this.postService = postService;
+        this.loggedUser = loggedUser;
     }
 
     @ModelAttribute("addPostDto")
@@ -31,7 +35,9 @@ public class PostController {
 
     @GetMapping("/post/add")
     public String addPost() {
-
+        if (!this.loggedUser.isLogged()){
+            return "redirect:/";
+        }
         return "post-add";
     }
 
@@ -48,8 +54,23 @@ public class PostController {
             return "redirect:/post/add";
         }
 
+        return "redirect:/home";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String removeUserPost(@PathVariable Long id){
+
+        this.postService.removePost(id);
 
         return "redirect:/home";
+    }
 
+    @GetMapping("/likes/{id}")
+    public String likePost(@PathVariable Long id){
+
+        this.postService.addUserLikes(id);
+
+
+        return "redirect:/home";
     }
 }

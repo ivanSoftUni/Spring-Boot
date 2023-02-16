@@ -1,9 +1,12 @@
 package com.likebookapp.model.dtos;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+
 
 public class LoginUserDto {
+
 
     @NotBlank
     @Size(min = 3, max = 20)

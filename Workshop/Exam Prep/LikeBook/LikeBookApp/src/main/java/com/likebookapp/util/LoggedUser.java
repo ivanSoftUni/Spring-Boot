@@ -1,4 +1,4 @@
-package com.likebookapp.session;
+package com.likebookapp.util;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -28,5 +28,13 @@ public class LoggedUser {
 
     public boolean isLogged() {
         return this.username != null && this.id != null;
+    }
+
+    @Override
+    public String toString() {
+        return "LoggedUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                '}';
     }
 }

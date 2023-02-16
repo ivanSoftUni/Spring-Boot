@@ -1,8 +1,8 @@
 package com.likebookapp.model.entity;
 
 import com.likebookapp.model.enums.MoodName;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "moods")

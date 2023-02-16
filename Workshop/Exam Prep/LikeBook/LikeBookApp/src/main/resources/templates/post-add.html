@@ -20,6 +20,7 @@
             <textarea type="text" class="form-control"
                       id="content"
                       name="content"
+                      th:field="*{content}"
             th:errorclass="is-invalid"></textarea>
             <small class="text-danger invalid-feedback">Content error message</small>
         </div>

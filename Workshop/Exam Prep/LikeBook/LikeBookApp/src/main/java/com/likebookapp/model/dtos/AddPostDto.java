@@ -1,18 +1,22 @@
 package com.likebookapp.model.dtos;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import com.likebookapp.model.enums.MoodName;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 public class AddPostDto {
 
     private Long id;
 
-    @NotBlank
+
+    @NotNull
     @Size(min = 2, max = 150)
     private String content;
 
-    @NotBlank
-    private String mood;
+    @NotNull
+    private MoodName mood;
 
     public AddPostDto() {
 
@@ -34,11 +38,11 @@ public class AddPostDto {
         this.content = content;
     }
 
-    public String getMood() {
+    public MoodName getMood() {
         return mood;
     }
 
-    public void setMood(String mood) {
+    public void setMood(MoodName mood) {
         this.mood = mood;
     }
 }

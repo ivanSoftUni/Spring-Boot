@@ -4,7 +4,7 @@ import com.likebookapp.model.dtos.LoginUserDto;
 import com.likebookapp.model.dtos.UserRegistrationDto;
 import com.likebookapp.model.entity.User;
 import com.likebookapp.repository.UserRepository;
-import com.likebookapp.session.LoggedUser;
+import com.likebookapp.util.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +13,8 @@ import java.util.Optional;
 @Service
 public class AuthService {
 
-    private UserRepository userRepository;
-    private LoggedUser loggedUser;
+    private final UserRepository userRepository;
+    private final LoggedUser loggedUser;
 
 
     @Autowired
@@ -62,5 +62,27 @@ public class AuthService {
         }
 
         return true;
+    }
+
+    private User getUserByUsername(String username) {
+        return this.userRepository.findByUsername(username).orElse(null);
+    }
+
+    public void loginUser(String username) {
+        User user = this.getUserByUsername(username);
+
+        this.loggedUser.setId(user.getId());
+        this.loggedUser.setUsername(user.getUsername());
+
+    }
+
+    public void logout() {
+        this.loggedUser.setId(null);
+        this.loggedUser.setUsername(null);
+    }
+
+    public User findUserById(Long id) {
+
+        return this.userRepository.findById(id).get();
     }
 }
