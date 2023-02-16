@@ -22,7 +22,7 @@ public class Product extends BaseEntity{
     private BigDecimal price;
 
     @Column
-    private LocalDateTime neededBefore;
+    private LocalDateTime before;
 
     @ManyToOne
     private Category category;
@@ -55,12 +55,12 @@ public class Product extends BaseEntity{
         this.price = price;
     }
 
-    public LocalDateTime getNeededBefore() {
-        return neededBefore;
+    public LocalDateTime getBefore() {
+        return before;
     }
 
-    public void setNeededBefore(LocalDateTime neededBefore) {
-        this.neededBefore = neededBefore;
+    public void setBefore(LocalDateTime before) {
+        this.before = before;
     }
 
     public Category getCategory() {

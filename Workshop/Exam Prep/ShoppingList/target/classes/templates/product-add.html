@@ -12,47 +12,74 @@
 <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add product</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
-    <form class="mx-auto w-25 bg-blur rounded" method="" action="/">
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="POST"
+          th:action="@{/product/add}"
+          th:object="${addProductDto}">
+
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2 text-white">Name</label>
             </div>
-            <input type="text" class="form-control" id="name" name="name"/>
-            <small class="text-danger"> Name error</small>
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   name="name"
+                   th:field="*{name}"
+                   th:errorclass="is-invalid"/>
+            <small class="text-danger bg-danger"> Name error</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <textarea type="text" class="form-control" id="description" name="description"></textarea>
-            <small class="text-danger">Description error message</small>
+            <textarea
+                    type="text"
+                    class="form-control"
+                    id="description"
+                    name="description"
+                    th:field="*{description}"
+                    th:errorclass="is-invalid"></textarea>
+            <small class="text-danger bg-danger">Description error message</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="neededBefore" class="h4 mb-2">Before</label>
             </div>
-            <input type="datetime-local" class="form-control" id="neededBefore" name="neededBefore"/>
-            <small class="text-danger">Needed before date error</small>
+            <input type="datetime-local"
+                   class="form-control"
+                   id="neededBefore"
+                   name="neededBefore"
+                   th:field="*{before}"
+                   th:errorclass="is-invalid"/>
+            <small class="text-danger bg-danger">Needed before date error</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="price" class="h4 mb-2">Price</label>
             </div>
-            <input type="number" step="0.1" class="form-control" id="price" name="price"/>
-            <small class="text-danger">Price error message</small>
+            <input type="number"
+                   step="0.1"
+                   class="form-control"
+                   id="price"
+                   name="price"
+                   th:field="*{price}"
+                   th:errorclass="is-invalid"/>
+            <small class="text-danger bg-danger">Price error message</small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="category" class="h4 mb-2">Category</label>
             </div>
-            <select class="browser-default custom-select" id="category" name="category">
+            <select th:field="*{category}"
+                    th:errorclass="is-invalid" class="browser-default custom-select" id="category" name="category">
                 <option value="">Select category</option>
                 <option value="FOOD">Food</option>
                 <option value="DRINK">Drink</option>
                 <option value="HOUSEHOLD">Household</option>
                 <option value="OTHER">Other</option>
             </select>
-            <small class="text-danger">Category error message</small>
+            <small class="text-danger bg-danger">Category error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">
