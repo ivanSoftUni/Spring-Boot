@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Shopping list App</title>
-    <th:block th:replace="~{fragments/head}"></th:block>
+    <th:block th:include="~{fragments/head}"></th:block>
 </head>
 <body>
 <header th:include="~{fragments/header}">
@@ -27,7 +27,7 @@
                    name="name"
                    th:field="*{name}"
                    th:errorclass="is-invalid"/>
-            <small class="text-danger bg-danger"> Name error</small>
+            <small class="text-danger invalid-feedback bg-danger"> Name error</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
@@ -40,7 +40,7 @@
                     name="description"
                     th:field="*{description}"
                     th:errorclass="is-invalid"></textarea>
-            <small class="text-danger bg-danger">Description error message</small>
+            <small class="text-danger invalid-feedback bg-danger">Description error message</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
@@ -52,7 +52,7 @@
                    name="neededBefore"
                    th:field="*{before}"
                    th:errorclass="is-invalid"/>
-            <small class="text-danger bg-danger">Needed before date error</small>
+            <small class="text-danger invalid-feedback bg-danger">Needed before date error</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
@@ -65,7 +65,7 @@
                    name="price"
                    th:field="*{price}"
                    th:errorclass="is-invalid"/>
-            <small class="text-danger bg-danger">Price error message</small>
+            <small class="text-danger invalid-feedback bg-danger">Price error message</small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
@@ -79,7 +79,7 @@
                 <option value="HOUSEHOLD">Household</option>
                 <option value="OTHER">Other</option>
             </select>
-            <small class="text-danger bg-danger">Category error message</small>
+            <small class="text-danger invalid-feedback bg-danger">Category error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

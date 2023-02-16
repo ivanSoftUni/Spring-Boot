@@ -1,16 +1,13 @@
 package com.softuni.shoppinglist.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -22,12 +19,12 @@ public class Product extends BaseEntity{
     private BigDecimal price;
 
     @Column
-    private LocalDateTime before;
+    private LocalDateTime needBefore;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
-    public Product(){
+    public Product() {
 
     }
 
@@ -55,12 +52,12 @@ public class Product extends BaseEntity{
         this.price = price;
     }
 
-    public LocalDateTime getBefore() {
-        return before;
+    public LocalDateTime getNeedBefore() {
+        return needBefore;
     }
 
-    public void setBefore(LocalDateTime before) {
-        this.before = before;
+    public void setNeedBefore(LocalDateTime needBefore) {
+        this.needBefore = needBefore;
     }
 
     public Category getCategory() {
@@ -69,5 +66,13 @@ public class Product extends BaseEntity{
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Name: %s Price: %.02f lv", this.name, this.price));
+
+        return sb.toString();
     }
 }

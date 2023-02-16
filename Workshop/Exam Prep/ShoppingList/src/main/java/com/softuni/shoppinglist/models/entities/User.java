@@ -17,8 +17,8 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-//    @ManyToMany
-//    private Set<Product> products;
+    @ManyToMany
+    private Set<Product> products;
 
     public User() {
 
@@ -48,11 +48,11 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-//    public Set<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(Set<Product> products) {
-//        this.products = products;
-//    }
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 }

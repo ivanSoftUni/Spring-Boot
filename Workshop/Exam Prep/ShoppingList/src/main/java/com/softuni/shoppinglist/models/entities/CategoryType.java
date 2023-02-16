@@ -7,13 +7,13 @@ public enum CategoryType {
     HOUSEHOLD("Household"),
     OTHER("Other");
 
-    private final String value;
+    private final String name;
 
-    private CategoryType(String value) {
-        this.value = value;
+    private CategoryType(String name) {
+        this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
 }

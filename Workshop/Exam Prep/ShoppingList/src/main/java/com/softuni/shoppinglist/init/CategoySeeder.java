@@ -25,7 +25,7 @@ public class CategoySeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (this.categoryRepository.count() == 0) {
             List<Category> categoryList = Arrays.stream(CategoryType.values())
-                    .map(c -> new Category(c))
+                    .map(Category::new)
                     .collect(Collectors.toList());
 
             this.categoryRepository.saveAll(categoryList);

@@ -59,7 +59,6 @@ public class AuthController {
             return "redirect:/register";
         }
 
-        System.out.println(userRegistrationDto);
 
         return "redirect:/login";
     }
