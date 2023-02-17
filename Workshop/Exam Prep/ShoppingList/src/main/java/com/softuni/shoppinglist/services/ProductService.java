@@ -73,9 +73,7 @@ public class ProductService {
                 .map(Product::getPrice)
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
-//        if (totalPrice == BigDecimal.ZERO) {
-//            return totalPrice = BigDecimal.valueOf(0.00);
-//        }
+
         return totalPrice;
     }
 
