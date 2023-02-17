@@ -20,14 +20,21 @@
                 <strong class="bg-blur rounded border-left border-white pl-3 border-bottom">Add Order</strong></h1>
         </div>
         <div class="container bg-blur rounded p-5 mt-5 w-75">
-            <form action="/" method="POST"
+            <form th:action="@{/order/add}"
+                  th:method="POST"
+                  th:object="${addOrderDto}"
                   class=" text-center text-light">
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name"
-                               aria-describedby="nameHelpInline" placeholder="Name">
-                        <small id="nameHelpInline" class="bg-danger text-light rounded">
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               aria-describedby="nameHelpInline"
+                               placeholder="Name"
+                               th:field="*{name}"
+                               th:errorclass="is-invalid">
+                        <small id="nameHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             Name must be between 3 and 20 characters.
                         </small>
                     </div>
@@ -36,8 +43,10 @@
                     <label for="price" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
                         <input type="number" step="1" class="form-control" id="price"
-                               aria-describedby="priceHelpInline">
-                        <small id="priceHelpInline" class="bg-danger text-light rounded">
+                               aria-describedby="priceHelpInline"
+                               th:field="*{price}"
+                               th:errorclass="is-invalid">
+                        <small id="priceHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             Price must be positive.
                         </small>
                     </div>
@@ -46,8 +55,10 @@
                     <label for="orderTime" class="col-sm-2 col-form-label">Order time</label>
                     <div class="col-sm-10">
                         <input type="datetime-local" class="form-control" id="orderTime"
-                               aria-describedby="orderTimeHelpInline">
-                        <small id="orderTimeHelpInline" class="bg-danger text-light rounded">
+                               aria-describedby="orderTimeHelpInline"
+                               th:field="*{dateTime}"
+                               th:errorclass="is-invalid">
+                        <small id="orderTimeHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             Order time cannot be in the future.
                         </small>
                     </div>
@@ -56,15 +67,17 @@
                     <label for="category" class="col-sm-2 col-form-label">Category</label>
                     <div class="col-sm-10">
                         <select id="category" name="category" class="custom-select"
-                                aria-describedby="categoryHelpInline">
+                                aria-describedby="categoryHelpInline"
+                                th:field="*{category}"
+                                th:errorclass="is-invalid">
                             <option value="" selected>Category</option>
-                            <option value="">Coffee</option>
-                            <option value="">Cake</option>
-                            <option value="">Drink</option>
-                            <option value="">Other</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Cake">Cake</option>
+                            <option value="Drink">Drink</option>
+                            <option value="Other">Other</option>
 
                         </select>
-                        <small id="categoryHelpInline" class="bg-danger text-light rounded">
+                        <small id="categoryHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             You must select the category.
                         </small>
                     </div>
@@ -73,9 +86,11 @@
                     <label for="description" class="col-sm-2 col-form-label">Description</label>
                     <div class="col-sm-10">
                     <textarea class="form-control" id="description"
-                              aria-describedby="descriptionHelpInline" placeholder="Description">
+                              aria-describedby="descriptionHelpInline" placeholder="Description"
+                              th:field="*{description}"
+                              th:errorclass="is-invalid">
                     </textarea>
-                        <small id="descriptionHelpInline" class="bg-danger text-light rounded">
+                        <small id="descriptionHelpInline" class="bg-danger text-light rounded invalid-feedback">
                             The description must be more than 5 characters.
                         </small>
                     </div>

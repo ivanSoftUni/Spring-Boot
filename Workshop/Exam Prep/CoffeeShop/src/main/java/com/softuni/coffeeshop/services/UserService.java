@@ -14,13 +14,14 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private LoggedUser loggedUser;
+    private OrderService orderService;
 
 
     @Autowired
-    public UserService(UserRepository userRepository, LoggedUser currentUser) {
+    public UserService(UserRepository userRepository, LoggedUser loggedUser, OrderService orderService) {
         this.userRepository = userRepository;
         this.loggedUser = loggedUser;
-
+        this.orderService = orderService;
     }
 
     public boolean toRegister(UserRegistrationDto userRegistrationDto) {
@@ -71,9 +72,9 @@ public class UserService {
         return this.userRepository.findByUsername(username).orElse(null);
     }
 
-    public boolean isLogged() {
-        return loggedUser.getId() != null;
-    }
+//    public boolean isLogged() {
+//        return loggedUser.getId() != null;
+//    }
 
     public void logout() {
         this.loggedUser.setId(null);

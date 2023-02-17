@@ -65,9 +65,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid LoginDto loginDto,
-                        BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes) {
+    public String loginUser(@Valid LoginDto loginDto,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginDto", loginDto);
@@ -84,7 +84,6 @@ public class AuthController {
 
             return "redirect:/login";
         }
-
         this.userService.loginUser(loginDto.getUsername());
 
         return "redirect:/home";
